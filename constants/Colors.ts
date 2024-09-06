@@ -28,4 +28,5 @@ export const Colors = {
   gray: '#222222',
   green: '#22bf62',
   lightGray: '#222',
+  borderBottomColor: '#222',
 };

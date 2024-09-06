@@ -24,7 +24,7 @@ export default function TabLayout() {
         tabBarBackground: () => (
           <BlurView
             intensity={Platform.OS === 'ios' ? 60 : 100}
-            tint={'dark'}
+            tint={'default'}
             style={{
               ...StyleSheet.absoluteFillObject,
               overflow: 'hidden',

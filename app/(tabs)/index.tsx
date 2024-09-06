@@ -345,20 +345,34 @@ export default function HomeScreen() {
       >
         {items.map((x) => (
           <TouchableOpacity
-            style={styles.item}
+            style={{
+              height: 80,
+              width: '100%',
+              justifyContent: 'space-between',
+            }}
             key={x}
             onPress={() => router.navigate('/chatRoom')}
           >
-            <Image
-              style={styles.image}
-              source={{
-                uri: 'https://i.ibb.co/YySxPQC/pro.jpeg',
+            <View style={styles.item}>
+              <Image
+                style={styles.image}
+                source={{
+                  uri: 'https://i.ibb.co/YySxPQC/pro.jpeg',
+                }}
+              />
+              <View style={styles.detail}>
+                <Text style={styles.name}>Name</Text>
+                <Text style={styles.description}>Message..</Text>
+              </View>
+            </View>
+            <View
+              style={{
+                borderBottomColor: Colors.borderBottomColor,
+                borderBottomWidth: 1,
+                width: '100%',
+                marginLeft: 90,
               }}
             />
-            <View style={styles.detail}>
-              <Text style={styles.name}>Name</Text>
-              <Text style={styles.description}>Message..</Text>
-            </View>
           </TouchableOpacity>
         ))}
       </Animated.ScrollView>
@@ -379,16 +393,19 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 15,
     flexDirection: 'row',
-    alignItems: 'center',
+    height: '90%',
   },
   image: {
-    height: 45,
-    width: 45,
+    height: 60,
+    width: 60,
     borderRadius: 30,
     backgroundColor: '#ccc',
   },
   detail: {
     marginLeft: 10,
+    height: '90%',
+    width: '80%',
+    alignSelf: 'flex-start',
   },
   name: {
     fontSize: 15,
