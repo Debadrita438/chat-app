@@ -28,15 +28,7 @@ export function Header(props: IHeaderType) {
     <Animated.View style={[styles.container, props.backgroundColorStyle]}>
       <AnimatedBlurView
         tint={'default'}
-        style={{
-          ...StyleSheet.absoluteFillObject,
-          overflow: 'hidden',
-          justifyContent: 'space-between',
-          flexDirection: 'row',
-          padding: 20,
-          width: '100%',
-          alignItems: 'flex-end',
-        }}
+        style={styles.blurViewContainer}
         animatedProps={props.animatedProps}
       >
         <View style={styles.buttonContainer}>
@@ -62,14 +54,19 @@ export function Header(props: IHeaderType) {
 
 const styles = StyleSheet.create({
   container: {
-    // marginTop: Platform.OS === 'android' ? Constants.statusBarHeight : 0,
-    // justifyContent: 'space-between',
-    // flexDirection: 'row',
     width: '100%',
     height: Constants.statusBarHeight + 60,
     position: 'absolute',
-    // top: Constants.statusBarHeight,
     zIndex: 1,
+  },
+  blurViewContainer: {
+    ...StyleSheet.absoluteFillObject,
+    overflow: 'hidden',
+    justifyContent: 'space-between',
+    flexDirection: 'row',
+    padding: 20,
+    width: '100%',
+    alignItems: 'flex-end',
   },
   buttonContainer: {
     height: 25,

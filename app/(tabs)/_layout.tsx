@@ -33,6 +33,7 @@ export default function TabLayout() {
           />
         ),
       }}
+      backBehavior="history"
     >
       <Tabs.Screen
         name="index"

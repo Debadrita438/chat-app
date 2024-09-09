@@ -240,7 +240,6 @@ const items = [
 
 export default function HomeScreen() {
   const [searchText, setSearchText] = useState('');
-  const [blurIntensity, setBlurIntensity] = useState(0);
 
   const bottomTabBarHeight = useBottomTabBarHeight();
 
@@ -361,7 +360,15 @@ export default function HomeScreen() {
                 }}
               />
               <View style={styles.detail}>
-                <Text style={styles.name}>Name</Text>
+                <View
+                  style={{
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                  }}
+                >
+                  <Text style={styles.name}>Name</Text>
+                  <Text style={styles.description}>Yesterday</Text>
+                </View>
                 <Text style={styles.description}>Message..</Text>
               </View>
             </View>
