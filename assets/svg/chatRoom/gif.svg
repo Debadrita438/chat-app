@@ -1,0 +1,4 @@
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" id="Gif">
+  <path stroke="#FFFFFF" stroke-linejoin="round" d="M2 6C2 3.79086 3.79086 2 6 2H18C20.2091 2 22 3.79086 22 6V18C22 20.2091 20.2091 22 18 22H6C3.79086 22 2 20.2091 2 18V6Z" class="colorStroke000000 svgStroke"></path>
+  <path stroke="#FFFFFF" stroke-linecap="round" stroke-linejoin="round" d="M12 8V16M15 16V12M19 8H15.5C15.2239 8 15 8.22386 15 8.5V12M15 12H18M9 8H7.5C6.11929 8 5 9.11929 5 10.5V12 13.7778C5 15.0051 5.99492 16 7.22222 16V16C8.20406 16 9 15.2041 9 14.2222V12.5C9 12.2239 8.77614 12 8.5 12H7.5" class="colorStroke000000 svgStroke"></path>
+</svg>

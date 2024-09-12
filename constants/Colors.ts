@@ -29,4 +29,8 @@ export const Colors = {
   green: '#22bf62',
   lightGray: '#222',
   borderBottomColor: '#222',
+  bottomChatBarColor: '#232625',
+  textInputColor: '#3b3b3b',
+  chatBubbleGreen: '#144d38',
+  chatBubbleGray: '#232627',
 };

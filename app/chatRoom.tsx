@@ -1,47 +1,49 @@
-import { Image, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  FlatList,
+  Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from 'react-native';
+import { useState } from 'react';
 import Constants from 'expo-constants';
 import { StatusBar } from 'expo-status-bar';
 import { router } from 'expo-router';
-import Animated, {
-  interpolateColor,
-  useAnimatedStyle,
-  useSharedValue,
-} from 'react-native-reanimated';
 import { BlurView } from 'expo-blur';
 
 import { Colors } from '@/constants/Colors';
 import BackIcon from '@/assets/svg/chatRoom/backArrow.svg';
 import CallIcon from '@/assets/svg/chatRoom/call.svg';
 import VideoCallIcon from '@/assets/svg/chatRoom/videoCall.svg';
+import PlusIcon from '@/assets/svg/chatRoom/plus.svg';
+import RupeeIcon from '@/assets/svg/chatRoom/rupee.svg';
+import CameraIcon from '@/assets/svg/chatRoom/camera.svg';
+import MicIcon from '@/assets/svg/chatRoom/mic.svg';
+import GifIcon from '@/assets/svg/chatRoom/gif.svg';
+import { Path, Svg } from 'react-native-svg';
+import ChatBubble, { BubbleType } from '@/components/ChatRoom/ChatBubble';
 
 export default function ChatRoom() {
-  const scrollY = useSharedValue(0);
-
-  // const AnimatedBlurView = Animated.createAnimatedComponent(BlurView);
-
-  // Background color interpolation
-  const backgroundColorStyle = useAnimatedStyle(() => {
-    const backgroundColor = interpolateColor(
-      scrollY.value,
-      [10, 300],
-      [Colors.black, 'transparent'],
-    );
-    return { backgroundColor };
-  });
+  const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   return (
     <View style={{ flex: 1 }}>
       <StatusBar style="light" />
       {/* header */}
-      <Animated.View
+      <View
         style={[
           {
             width: '100%',
-            height: Constants.statusBarHeight + 60,
+            height: Constants.statusBarHeight + 50,
             position: 'absolute',
             zIndex: 1,
+            backgroundColor: 'transparent',
           },
-          backgroundColorStyle,
         ]}
       >
         <BlurView
@@ -51,10 +53,10 @@ export default function ChatRoom() {
             overflow: 'hidden',
             justifyContent: 'space-between',
             flexDirection: 'row',
-            // padding: 20,
             width: '100%',
             alignItems: 'flex-end',
           }}
+          intensity={50}
         >
           <Pressable
             style={{
@@ -125,7 +127,112 @@ export default function ChatRoom() {
             </View>
           </View>
         </BlurView>
-      </Animated.View>
+      </View>
+
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      >
+        <>
+          <FlatList
+            data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+            inverted
+            ListFooterComponent={() => (
+              <View style={{ paddingTop: Constants.statusBarHeight + 90 }} />
+            )}
+            renderItem={({ item, index }) => (
+              <ChatBubble
+                bubbleType={index % 2 === 0 ? BubbleType.Own : BubbleType.Other}
+              />
+            )}
+          />
+
+          {/* bottom tab */}
+          <View
+            style={{
+              justifyContent: 'flex-end',
+              height: isKeyboardOpen ? 55 : 75,
+              backgroundColor: Colors.bottomChatBarColor,
+            }}
+          >
+            <View
+              style={{
+                flexDirection: 'row',
+                width: '100%',
+                height: '100%',
+                alignItems: 'flex-start',
+                paddingHorizontal: 10,
+                paddingTop: 10,
+                justifyContent: 'space-between',
+              }}
+            >
+              <View
+                style={{
+                  height: 26,
+                  width: 40,
+                  justifyContent: 'center',
+                }}
+              >
+                <PlusIcon width={32} height={32} fill={Colors.white} />
+              </View>
+              <View
+                style={{
+                  height: 32,
+                  // width: '65%',
+                  backgroundColor: Colors.textInputColor,
+                  borderRadius: 20,
+                  justifyContent: 'space-between',
+                  flexDirection: 'row',
+                  paddingHorizontal: 5,
+                  alignItems: 'center',
+                  flex: 1,
+                }}
+              >
+                <TextInput
+                  style={{ height: '100%', width: '80%' }}
+                  onFocus={() => setIsKeyboardOpen(true)}
+                  onBlur={() => setIsKeyboardOpen(false)}
+                />
+                <GifIcon width={25} height={25} />
+              </View>
+              {/* <View
+                style={{
+                  height: 26,
+                  width: 26,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: 'transparent',
+                  borderColor: Colors.white,
+                  borderRadius: 16,
+                  borderWidth: 2,
+                }}
+              >
+                <RupeeIcon fill={Colors.white} />
+              </View> */}
+              <View
+                style={{
+                  height: 26,
+                  width: 45,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <CameraIcon fill={Colors.white} height={32} width={32} />
+              </View>
+              <View
+                style={{
+                  height: 26,
+                  width: 35,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <MicIcon fill={Colors.white} height={28} width={28} />
+              </View>
+            </View>
+          </View>
+        </>
+      </KeyboardAvoidingView>
     </View>
   );
 }
