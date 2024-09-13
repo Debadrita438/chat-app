@@ -13,7 +13,7 @@ export default function RootLayout() {
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
     HelveticaNeueBold: require('../assets/fonts/HelveticaNeueBold.otf'),
     HelveticaNeueMedium: require('../assets/fonts/HelveticaNeueMedium.otf'),
-    HelveticaNeueRegular: require('../assets/fonts/HelveticaNeue Regular.ttf'),
+    HelveticaNeueRegular: require('../assets/fonts/HelveticaNeue-Regular.otf'),
   });
 
   useEffect(() => {

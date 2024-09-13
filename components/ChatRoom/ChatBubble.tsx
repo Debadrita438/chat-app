@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from 'react-native';
-import React from 'react';
+import { View, Text, StyleSheet, Dimensions } from 'react-native';
+import React, { useState } from 'react';
 import { Path, Svg } from 'react-native-svg';
 
 import { Colors } from '@/constants/Colors';
@@ -11,9 +11,12 @@ export enum BubbleType {
 
 interface IChatBubbleProps {
   bubbleType: BubbleType;
+  message: string;
 }
 
 export default function ChatBubble(props: IChatBubbleProps) {
+  const [isOneLine, setIsOneLine] = useState(false);
+
   const tailPath =
     props.bubbleType === BubbleType.Own
       ? 'M48,35c-7-4-6-8.75-6-17.5C28,17.5,29,35,48,35z'
@@ -32,24 +35,42 @@ export default function ChatBubble(props: IChatBubbleProps) {
             : styles.otherBubbleContainer
         }
       >
-        <Text
-          style={{
-            color: Colors.white,
-            fontFamily: 'HelveticaNeueMedium',
-            fontSize: 15,
+        <View
+          style={
+            isOneLine
+              ? { paddingRight: 25, flexDirection: 'row' }
+              : { flexDirection: 'column' }
+          }
+          onLayout={(e) => {
+            let { height, width } = e.nativeEvent.layout;
+
+            if (height < 20 && width <= 143) {
+              setIsOneLine(true);
+            } else {
+              setIsOneLine(false);
+            }
           }}
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-        </Text>
-        <Text style={{ alignSelf: 'flex-end', color: Colors.white }}>
+          <Text
+            style={{
+              color: Colors.white,
+              fontFamily: 'HelveticaNeueRegular',
+              marginRight: 10,
+            }}
+          >
+            {props.message}
+          </Text>
+        </View>
+        <Text
+          style={{
+            alignSelf: 'flex-end',
+            color: Colors.white,
+            fontFamily: 'HelveticaNeueRegular',
+            fontSize: 12,
+            marginTop: isOneLine ? -10 : 2,
+            marginLeft: isOneLine ? 40 : 2,
+          }}
+        >
           9:08 AM
         </Text>
       </View>
@@ -88,7 +109,7 @@ export default function ChatBubble(props: IChatBubbleProps) {
 const styles = StyleSheet.create({
   ownBubbleContainer: {
     backgroundColor: Colors.chatBubbleGreen,
-    maxWidth: '80%',
+    maxWidth: '70%',
     minWidth: 0,
     padding: 10,
     alignSelf: 'flex-end',
@@ -98,7 +119,7 @@ const styles = StyleSheet.create({
   },
   otherBubbleContainer: {
     backgroundColor: Colors.chatBubbleGray,
-    maxWidth: '80%',
+    maxWidth: '70%',
     minWidth: 0,
     padding: 10,
     alignSelf: 'flex-start',

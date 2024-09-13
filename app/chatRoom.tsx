@@ -1,7 +1,6 @@
 import {
   FlatList,
   Image,
-  Keyboard,
   KeyboardAvoidingView,
   Platform,
   Pressable,
@@ -21,11 +20,9 @@ import BackIcon from '@/assets/svg/chatRoom/backArrow.svg';
 import CallIcon from '@/assets/svg/chatRoom/call.svg';
 import VideoCallIcon from '@/assets/svg/chatRoom/videoCall.svg';
 import PlusIcon from '@/assets/svg/chatRoom/plus.svg';
-import RupeeIcon from '@/assets/svg/chatRoom/rupee.svg';
 import CameraIcon from '@/assets/svg/chatRoom/camera.svg';
 import MicIcon from '@/assets/svg/chatRoom/mic.svg';
 import GifIcon from '@/assets/svg/chatRoom/gif.svg';
-import { Path, Svg } from 'react-native-svg';
 import ChatBubble, { BubbleType } from '@/components/ChatRoom/ChatBubble';
 
 export default function ChatRoom() {
@@ -143,6 +140,11 @@ export default function ChatRoom() {
             renderItem={({ item, index }) => (
               <ChatBubble
                 bubbleType={index % 2 === 0 ? BubbleType.Own : BubbleType.Other}
+                // message={
+                //   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+                // }
+                // message={'Test'}
+                message={'1234567891011121314'}
               />
             )}
           />
