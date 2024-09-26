@@ -136,7 +136,7 @@ export const styles = StyleSheet.create({
   separateText: {
     fontFamily: Fonts.HelveticaNeueRegular,
     fontSize: Normalize(16),
-    marginLeft: Normalize(5),
+    marginHorizontal: Normalize(5),
   },
   documentTimeContainer: {
     alignSelf: 'flex-end',
