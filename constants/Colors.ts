@@ -33,4 +33,10 @@ export const Colors = {
   textInputColor: '#3b3b3b',
   chatBubbleGreen: '#144d38',
   chatBubbleGray: '#232627',
+  blurBlack: '#000000c0',
+  hyperlinkGreen: '#217b51',
+  ownBubbleTimeGreen: '#89b2a2',
+  otherBubbleTimeGray: '#8d8e90',
+  darkGreen: '#0f3e2d',
+  darkGray: '#1b1e1d',
 };

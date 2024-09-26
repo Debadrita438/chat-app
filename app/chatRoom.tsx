@@ -23,10 +23,163 @@ import PlusIcon from '@/assets/svg/chatRoom/plus.svg';
 import CameraIcon from '@/assets/svg/chatRoom/camera.svg';
 import MicIcon from '@/assets/svg/chatRoom/mic.svg';
 import GifIcon from '@/assets/svg/chatRoom/gif.svg';
-import ChatBubble, { BubbleType } from '@/components/ChatRoom/ChatBubble';
+import ChatBubble from '@/components/ChatRoom/ChatBubble';
 
 export default function ChatRoom() {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
+
+  let messageList = [
+    {
+      id: 11,
+      message: '',
+      image: [
+        {
+          id: 1,
+          url: 'QA Report of Sports Production Build.docx',
+          type: 'doc',
+          size: '70 KB',
+        },
+      ],
+      time: new Date(),
+      userId: 2,
+    },
+    {
+      id: 10,
+      message:
+        'Look at this - https://docs.expo.dev/guides/linking/ this link describes linking',
+      image: [],
+      time: new Date(),
+      userId: 1,
+    },
+    {
+      id: 9,
+      message: '',
+      image: [
+        {
+          id: 1,
+          url: 'https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=600',
+          type: 'image',
+        },
+        {
+          id: 2,
+          url: 'https://img.freepik.com/free-photo/front-view-unknown-man-posing-studio_23-2149417570.jpg?w=740&t=st=1726742068~exp=1726742668~hmac=ed1c5c1a876b45bd1a90f564926d450b576a2af7ab18349808e35007f3e4ac5e',
+          type: 'image',
+        },
+        {
+          id: 3,
+          url: 'https://img.freepik.com/free-photo/front-view-unknown-man-posing-studio_23-2149417570.jpg?w=740&t=st=1726742068~exp=1726742668~hmac=ed1c5c1a876b45bd1a90f564926d450b576a2af7ab18349808e35007f3e4ac5e',
+          type: 'image',
+        },
+        {
+          id: 4,
+          url: 'https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=600',
+          type: 'image',
+        },
+        {
+          id: 5,
+          url: 'https://img.freepik.com/free-photo/front-view-unknown-man-posing-studio_23-2149417570.jpg?w=740&t=st=1726742068~exp=1726742668~hmac=ed1c5c1a876b45bd1a90f564926d450b576a2af7ab18349808e35007f3e4ac5e',
+          type: 'image',
+        },
+      ],
+      time: new Date(),
+      userId: 1,
+    },
+    {
+      id: 8,
+      message: '',
+      image: [
+        {
+          id: 1,
+          url: 'https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=600',
+          type: 'image',
+        },
+        {
+          id: 2,
+          url: 'https://img.freepik.com/free-photo/front-view-unknown-man-posing-studio_23-2149417570.jpg?w=740&t=st=1726742068~exp=1726742668~hmac=ed1c5c1a876b45bd1a90f564926d450b576a2af7ab18349808e35007f3e4ac5e',
+          type: 'image',
+        },
+        {
+          id: 3,
+          url: 'https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=600',
+          type: 'image',
+        },
+        {
+          id: 4,
+          url: 'https://img.freepik.com/free-photo/front-view-unknown-man-posing-studio_23-2149417570.jpg?w=740&t=st=1726742068~exp=1726742668~hmac=ed1c5c1a876b45bd1a90f564926d450b576a2af7ab18349808e35007f3e4ac5e',
+          type: 'image',
+        },
+      ],
+      time: new Date(),
+      userId: 2,
+    },
+    {
+      id: 7,
+      message:
+        "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+      image: [],
+      time: new Date(),
+      userId: 1,
+    },
+    {
+      id: 6,
+      message: 'Test1',
+      image: [],
+      time: new Date(),
+      userId: 1,
+    },
+    {
+      id: 5,
+      message: '12345678',
+      image: [],
+      time: new Date(),
+      userId: 1,
+    },
+    {
+      id: 4,
+      message: '12345678',
+      image: [],
+      time: new Date(),
+      userId: 2,
+    },
+    {
+      id: 3,
+      message: '1234567891011',
+      image: [],
+      time: new Date(),
+      userId: 2,
+    },
+    {
+      id: 2,
+      message: '',
+      image: [
+        {
+          id: 1,
+          url: 'https://images.pexels.com/photos/346529/pexels-photo-346529.jpeg?auto=compress&cs=tinysrgb&w=600',
+          type: 'image',
+        },
+        {
+          id: 2,
+          url: 'https://img.freepik.com/free-photo/front-view-unknown-man-posing-studio_23-2149417570.jpg?w=740&t=st=1726742068~exp=1726742668~hmac=ed1c5c1a876b45bd1a90f564926d450b576a2af7ab18349808e35007f3e4ac5e',
+          type: 'image',
+        },
+      ],
+      time: new Date(),
+      userId: 2,
+    },
+    {
+      id: 1,
+      message: '',
+      image: [
+        {
+          id: 1,
+          url: 'https://img.freepik.com/free-photo/front-view-unknown-man-posing-studio_23-2149417570.jpg?w=740&t=st=1726742068~exp=1726742668~hmac=ed1c5c1a876b45bd1a90f564926d450b576a2af7ab18349808e35007f3e4ac5e',
+          type: 'image',
+        },
+      ],
+      time: new Date(),
+      userId: 1,
+    },
+  ];
 
   return (
     <View style={{ flex: 1 }}>
@@ -132,21 +285,21 @@ export default function ChatRoom() {
       >
         <>
           <FlatList
-            data={[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+            data={messageList}
             inverted
             ListFooterComponent={() => (
               <View style={{ paddingTop: Constants.statusBarHeight + 90 }} />
             )}
-            renderItem={({ item, index }) => (
-              <ChatBubble
-                bubbleType={index % 2 === 0 ? BubbleType.Own : BubbleType.Other}
-                // message={
-                //   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-                // }
-                // message={'Test'}
-                message={'1234567891011121314'}
-              />
-            )}
+            renderItem={({ item, index }) => {
+              let addTail = false;
+              if (messageList[index - 1]?.userId) {
+                addTail = item.userId !== messageList[index - 1].userId;
+              } else {
+                addTail = true;
+              }
+
+              return <ChatBubble key={index} item={item} addTail={addTail} />;
+            }}
           />
 
           {/* bottom tab */}
