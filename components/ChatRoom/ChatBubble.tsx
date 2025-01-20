@@ -7,6 +7,7 @@ import {
   Dimensions,
   ImageBackground,
   Linking,
+  Pressable,
 } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -14,7 +15,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { Colors } from '@/constants/Colors';
 import { styles } from './ChatBubbleStyles';
 import { IChatBubbleProps } from '../Types';
-import DocumentIcon from '@/assets/svg/chatRoom/document.svg';
+import { Normalize } from '@/constants/Normalize';
+import { DownloadIcon, DocumentIcon } from '@/assets/svg';
 
 const userId = 1;
 
@@ -57,6 +59,7 @@ export default function ChatBubble(props: IChatBubbleProps) {
       );
       setImageSize(sizes);
     };
+
     fetchImageSizes();
   }, [props.item]);
 
@@ -263,53 +266,81 @@ export default function ChatBubble(props: IChatBubbleProps) {
           >
             <View
               style={{
+                ...styles.docInfoContainer,
                 backgroundColor:
                   props.item.userId === userId
                     ? Colors.darkGreen
                     : Colors.darkGray,
-                ...styles.documentContainer,
               }}
             >
-              <DocumentIcon />
-              <View style={{ width: '85%' }}>
-                <Text style={styles.documentName}>{img.url}</Text>
-                <View style={styles.fileMetaInfoContainer}>
-                  <Text
-                    style={{
-                      ...styles.fileSizeTypeText,
-                      color:
-                        props.item.userId === userId
-                          ? Colors.ownBubbleTimeGreen
-                          : Colors.otherBubbleTimeGray,
-                    }}
-                  >
-                    {img.size}
+              {/* Left Side */}
+              <View
+                style={{
+                  width:
+                    props.item.userId !== userId
+                      ? Dimensions.get('screen').width * 0.4
+                      : '100%',
+                  ...styles.documentContainer,
+                }}
+              >
+                <DocumentIcon height={Normalize(24)} width={Normalize(24)} />
+                <View style={{ width: '81%' }}>
+                  <Text style={styles.documentName} numberOfLines={2}>
+                    {img.url}
                   </Text>
-                  <Text
-                    style={{
-                      ...styles.separateText,
-                      color:
-                        props.item.userId === userId
-                          ? Colors.ownBubbleTimeGreen
-                          : Colors.otherBubbleTimeGray,
-                    }}
-                  >
-                    •
-                  </Text>
-                  <Text
-                    style={{
-                      ...styles.fileSizeTypeText,
-                      color:
-                        props.item.userId === userId
-                          ? Colors.ownBubbleTimeGreen
-                          : Colors.otherBubbleTimeGray,
-                    }}
-                  >
-                    {img.url.split('.')[1]}
-                  </Text>
+                  <View style={styles.fileMetaInfoContainer}>
+                    <Text
+                      style={{
+                        ...styles.fileSizeTypeText,
+                        color:
+                          props.item.userId === userId
+                            ? Colors.ownBubbleTimeGreen
+                            : Colors.otherBubbleTimeGray,
+                      }}
+                    >
+                      {img.size}
+                    </Text>
+                    <Text
+                      style={{
+                        ...styles.separateText,
+                        color:
+                          props.item.userId === userId
+                            ? Colors.ownBubbleTimeGreen
+                            : Colors.otherBubbleTimeGray,
+                      }}
+                    >
+                      •
+                    </Text>
+                    <Text
+                      style={{
+                        ...styles.fileSizeTypeText,
+                        color:
+                          props.item.userId === userId
+                            ? Colors.ownBubbleTimeGreen
+                            : Colors.otherBubbleTimeGray,
+                      }}
+                    >
+                      {img.url.split('.')[1]}
+                    </Text>
+                  </View>
                 </View>
               </View>
+
+              {/* Right Side */}
+              {props.item.userId !== userId && (
+                <Pressable
+                  style={styles.downloadIconContainer}
+                  onPress={() => console.log('download')}
+                >
+                  <DownloadIcon
+                    height={Normalize(20)}
+                    width={Normalize(20)}
+                    fill={Colors.green}
+                  />
+                </Pressable>
+              )}
             </View>
+
             <View style={styles.documentTimeContainer}>
               <Text
                 style={[
@@ -332,6 +363,44 @@ export default function ChatBubble(props: IChatBubbleProps) {
     });
   };
 
+  const renderPdf = () => {
+    return props.item.image.map((img) => {
+      return (
+        <Fragment key={img.id}>
+          <View
+            style={
+              props.item.userId === userId
+                ? [
+                    styles.ownBubbleContainer,
+                    {
+                      marginBottom: !props.addTail ? 5 : 12,
+                      padding: props.item.image.length > 0 ? 5 : 10,
+                    },
+                  ]
+                : [
+                    styles.otherBubbleContainer,
+                    {
+                      marginBottom: !props.addTail ? 5 : 12,
+                      padding: props.item.image.length > 0 ? 5 : 10,
+                    },
+                  ]
+            }
+          >
+            <View
+              style={{
+                ...styles.docInfoContainer,
+                backgroundColor:
+                  props.item.userId === userId
+                    ? Colors.darkGreen
+                    : Colors.darkGray,
+              }}
+            ></View>
+          </View>
+        </Fragment>
+      );
+    });
+  };
+
   return (
     <>
       {props.item.image.length > 0 &&
@@ -343,6 +412,8 @@ export default function ChatBubble(props: IChatBubbleProps) {
         renderMultiImages()
       ) : props.item.image[0]?.type === 'doc' ? (
         renderDocument()
+      ) : props.item.image[0]?.type === 'pdf' ? (
+        renderPdf()
       ) : (
         <>
           <View

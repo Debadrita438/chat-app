@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   FlatList,
   Image,
@@ -16,19 +17,49 @@ import { router } from 'expo-router';
 import { BlurView } from 'expo-blur';
 
 import { Colors } from '@/constants/Colors';
-import BackIcon from '@/assets/svg/chatRoom/backArrow.svg';
-import CallIcon from '@/assets/svg/chatRoom/call.svg';
-import VideoCallIcon from '@/assets/svg/chatRoom/videoCall.svg';
-import PlusIcon from '@/assets/svg/chatRoom/plus.svg';
-import CameraIcon from '@/assets/svg/chatRoom/camera.svg';
-import MicIcon from '@/assets/svg/chatRoom/mic.svg';
-import GifIcon from '@/assets/svg/chatRoom/gif.svg';
+import {
+  BackIcon,
+  CallIcon,
+  CameraIcon,
+  GifIcon,
+  MicIcon,
+  PlusIcon,
+  VideoCallIcon,
+} from '@/assets/svg';
 import ChatBubble from '@/components/ChatRoom/ChatBubble';
 
 export default function ChatRoom() {
   const [isKeyboardOpen, setIsKeyboardOpen] = useState(false);
 
   let messageList = [
+    {
+      id: 13,
+      message: '',
+      image: [
+        {
+          id: 1,
+          url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+          type: 'pdf',
+          size: '120 KB',
+        },
+      ],
+      time: new Date(),
+      userId: 1,
+    },
+    {
+      id: 12,
+      message: '',
+      image: [
+        {
+          id: 1,
+          url: 'QA Report of Sports Production Build.docx',
+          type: 'doc',
+          size: '70 KB',
+        },
+      ],
+      time: new Date(),
+      userId: 1,
+    },
     {
       id: 11,
       message: '',

@@ -112,11 +112,7 @@ export const styles = StyleSheet.create({
     fontSize: Normalize(14),
   },
   documentContainer: {
-    width: Dimensions.get('screen').width * 0.6,
     justifyContent: 'space-between',
-    alignItems: 'center',
-    borderRadius: Normalize(8),
-    padding: Normalize(5),
     flexDirection: 'row',
   },
   documentName: {
@@ -141,5 +137,17 @@ export const styles = StyleSheet.create({
   documentTimeContainer: {
     alignSelf: 'flex-end',
     marginTop: Normalize(5),
+  },
+  docInfoContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: Dimensions.get('screen').width * 0.6,
+    borderRadius: Normalize(8),
+    overflow: 'hidden',
+    padding: Normalize(10),
+  },
+  downloadIconContainer: {
+    alignItems: 'center',
+    width: Normalize(24),
   },
 });
