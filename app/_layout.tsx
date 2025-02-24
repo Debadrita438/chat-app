@@ -33,6 +33,10 @@ export default function RootLayout() {
       <Stack initialRouteName="(tabs)">
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="chatRoom" options={{ headerShown: false }} />
+        <Stack.Screen
+          name="chatImageDetails"
+          options={{ headerShown: false }}
+        />
         <Stack.Screen name="+not-found" />
       </Stack>
     </ThemeProvider>

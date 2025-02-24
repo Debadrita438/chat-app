@@ -9,3 +9,10 @@ export interface IChatBubbleProps {
   };
   addTail: boolean;
 }
+
+export interface IImageListProps {
+  id: number;
+  url: string;
+  type: string;
+  size?: string;
+}

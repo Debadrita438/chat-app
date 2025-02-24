@@ -34,15 +34,8 @@ export default function ChatRoom() {
   let messageList = [
     {
       id: 13,
-      message: '',
-      image: [
-        {
-          id: 1,
-          url: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
-          type: 'pdf',
-          size: '120 KB',
-        },
-      ],
+      message: 'https://docs.expo.dev/guides/linking/',
+      image: [],
       time: new Date(),
       userId: 1,
     },
@@ -216,99 +209,6 @@ export default function ChatRoom() {
     <View style={{ flex: 1 }}>
       <StatusBar style="light" />
       {/* header */}
-      <View
-        style={[
-          {
-            width: '100%',
-            height: Constants.statusBarHeight + 50,
-            position: 'absolute',
-            zIndex: 1,
-            backgroundColor: 'transparent',
-          },
-        ]}
-      >
-        <BlurView
-          tint={'default'}
-          style={{
-            ...StyleSheet.absoluteFillObject,
-            overflow: 'hidden',
-            justifyContent: 'space-between',
-            flexDirection: 'row',
-            width: '100%',
-            alignItems: 'flex-end',
-          }}
-          intensity={50}
-        >
-          <Pressable
-            style={{
-              width: 40,
-              height: 40,
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginBottom: 5,
-            }}
-            onPress={router.back}
-          >
-            <BackIcon fill={Colors.white} />
-          </Pressable>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              width: '87%',
-              alignItems: 'center',
-            }}
-          >
-            <View
-              style={{
-                maxWidth: '60%',
-                minWidth: '30%',
-                flexDirection: 'row',
-                justifyContent: 'space-evenly',
-                height: 50,
-                alignItems: 'center',
-              }}
-            >
-              <View
-                style={{
-                  width: 30,
-                  height: 30,
-                  borderRadius: 15,
-                  overflow: 'hidden',
-                }}
-              >
-                <Image
-                  style={{ width: '100%', height: '100%' }}
-                  source={{
-                    uri: 'https://i.ibb.co/YySxPQC/pro.jpeg',
-                  }}
-                />
-              </View>
-              <Text
-                style={{
-                  color: Colors.white,
-                  fontFamily: 'HelveticaNeueMedium',
-                }}
-              >
-                Jhon Doe
-              </Text>
-            </View>
-            <View
-              style={{
-                width: '25%',
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                alignItems: 'center',
-                height: 50,
-                paddingHorizontal: 10,
-              }}
-            >
-              <VideoCallIcon width={25} height={25} fill={Colors.white} />
-              <CallIcon width={22} height={22} fill={Colors.white} />
-            </View>
-          </View>
-        </BlurView>
-      </View>
 
       <KeyboardAvoidingView
         style={{ flex: 1 }}

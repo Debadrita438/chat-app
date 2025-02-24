@@ -11,12 +11,15 @@ import {
 } from 'react-native';
 import { Svg, Path } from 'react-native-svg';
 import { LinearGradient } from 'expo-linear-gradient';
+import { LinkPreview } from '@flyerhq/react-native-link-preview';
 
 import { Colors } from '@/constants/Colors';
 import { styles } from './ChatBubbleStyles';
 import { IChatBubbleProps } from '../Types';
 import { Normalize } from '@/constants/Normalize';
 import { DownloadIcon, DocumentIcon } from '@/assets/svg';
+import { isOnlyLink } from '@/utils/helper';
+import { router } from 'expo-router';
 
 const userId = 1;
 
@@ -57,6 +60,7 @@ export default function ChatBubble(props: IChatBubbleProps) {
           });
         }),
       );
+
       setImageSize(sizes);
     };
 
@@ -166,7 +170,7 @@ export default function ChatBubble(props: IChatBubbleProps) {
   const renderMultiImages = () => {
     return (
       <>
-        <View
+        <Pressable
           style={
             props.item.userId === userId
               ? {
@@ -177,6 +181,12 @@ export default function ChatBubble(props: IChatBubbleProps) {
                   marginBottom: !props.addTail ? 5 : 12,
                   ...styles.renderMultiOtherBubble,
                 }
+          }
+          onPress={() =>
+            router.navigate({
+              pathname: '/chatImageDetails',
+              params: { imageList: JSON.stringify(props.item.image) },
+            })
           }
         >
           {props.item.image.slice(0, 4).map((im, i) => (
@@ -209,7 +219,7 @@ export default function ChatBubble(props: IChatBubbleProps) {
               )}
             </View>
           ))}
-        </View>
+        </Pressable>
         {renderTail()}
       </>
     );
@@ -221,23 +231,46 @@ export default function ChatBubble(props: IChatBubbleProps) {
 
   const renderMessage = () => {
     return (
-      <Text style={styles.messageText}>
-        {parts.map((part, index) => {
-          if (urlRegex.test(part)) {
-            return (
-              <Text
-                key={index}
-                style={styles.linkTextStyle}
-                onPress={() => handleLinkPress(part)}
-              >
-                {part}
-              </Text>
-            );
-          }
-          return <Text key={index}>{part}</Text>;
-        })}
-        <Text style={{ color: 'transparent' }}>{' ' + '______'}</Text>
-      </Text>
+      <>
+        {isOnlyLink(props.item.message) ? (
+          <LinkPreview
+            text={props.item.message}
+            renderLinkPreview={(previewData) => (
+              <>
+                <Image
+                  style={{
+                    height: Normalize(100),
+                    width: '100%',
+                  }}
+                  resizeMode={'cover'}
+                  source={{ uri: previewData.previewData?.image?.url }}
+                />
+                <Text style={styles.linkPreviewText}>
+                  {previewData.previewData?.title}
+                </Text>
+              </>
+            )}
+          />
+        ) : (
+          <Text style={styles.messageText}>
+            {parts.map((part, index) => {
+              if (urlRegex.test(part)) {
+                return (
+                  <Text
+                    key={index}
+                    style={styles.linkTextStyle}
+                    onPress={() => handleLinkPress(part)}
+                  >
+                    {part}
+                  </Text>
+                );
+              }
+              return <Text key={index}>{part}</Text>;
+            })}
+            <Text style={{ color: 'transparent' }}>{' ' + '______'}</Text>
+          </Text>
+        )}
+      </>
     );
   };
 
@@ -363,44 +396,6 @@ export default function ChatBubble(props: IChatBubbleProps) {
     });
   };
 
-  const renderPdf = () => {
-    return props.item.image.map((img) => {
-      return (
-        <Fragment key={img.id}>
-          <View
-            style={
-              props.item.userId === userId
-                ? [
-                    styles.ownBubbleContainer,
-                    {
-                      marginBottom: !props.addTail ? 5 : 12,
-                      padding: props.item.image.length > 0 ? 5 : 10,
-                    },
-                  ]
-                : [
-                    styles.otherBubbleContainer,
-                    {
-                      marginBottom: !props.addTail ? 5 : 12,
-                      padding: props.item.image.length > 0 ? 5 : 10,
-                    },
-                  ]
-            }
-          >
-            <View
-              style={{
-                ...styles.docInfoContainer,
-                backgroundColor:
-                  props.item.userId === userId
-                    ? Colors.darkGreen
-                    : Colors.darkGray,
-              }}
-            ></View>
-          </View>
-        </Fragment>
-      );
-    });
-  };
-
   return (
     <>
       {props.item.image.length > 0 &&
@@ -412,8 +407,6 @@ export default function ChatBubble(props: IChatBubbleProps) {
         renderMultiImages()
       ) : props.item.image[0]?.type === 'doc' ? (
         renderDocument()
-      ) : props.item.image[0]?.type === 'pdf' ? (
-        renderPdf()
       ) : (
         <>
           <View

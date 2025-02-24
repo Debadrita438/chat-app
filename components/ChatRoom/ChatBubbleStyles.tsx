@@ -150,4 +150,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     width: Normalize(24),
   },
+  linkPreviewText: {
+    fontFamily: Fonts.HelveticaNeueMedium,
+    color: Colors.white,
+    fontSize: Normalize(12),
+  },
 });
